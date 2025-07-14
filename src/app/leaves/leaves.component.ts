@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
+import { ActivatedRoute } from '@angular/router';
 import { loadLeaves } from '../store/leaves/leaves.actions';
 import { selectLeaves } from '../store/leaves/leaves.selectors';
 
@@ -14,11 +15,16 @@ export class LeavesComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadLeaves());
+      this.route.queryParams.subscribe(params => {
+      const page = +params['Page'] || 1;
+      const pageLimit = +params['PageLimit'] || 10;
+      this.store.dispatch(loadLeaves({ page, pageLimit }));
+    });
   }
 
   goToEdit(id: number): void {

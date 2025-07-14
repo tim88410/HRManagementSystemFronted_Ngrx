@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LeavesService } from './leaves.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leaves-edit',
@@ -16,7 +17,8 @@ export class LeavesEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private leavesService: LeavesService
+    private leavesService: LeavesService,
+    private router: Router   
   ) {
     this.form = this.fb.group({
       leaves: this.fb.array([])
@@ -47,7 +49,9 @@ export class LeavesEditComponent implements OnInit {
     if (this.form.valid) {
       const payload = this.leavesArray.at(0).value;
       this.leavesService.updateLeave(payload).subscribe(() => {
-        alert('儲存成功');
+        this.router.navigate(['/leaves'], {
+            queryParams: { Page: 1, PageLimit: 10 }
+        });
       });
     } else {
       this.form.markAllAsTouched();
