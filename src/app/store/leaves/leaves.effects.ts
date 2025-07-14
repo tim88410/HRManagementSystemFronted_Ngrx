@@ -1,8 +1,9 @@
+import { Observable, of } from 'rxjs';
+import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as LeavesActions from './leaves.actions';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { LeavesService } from '../../leaves/leaves.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -12,17 +13,17 @@ export class LeavesEffects {
     private actions$: Actions,
     private leavesService: LeavesService,
     private authService: AuthService
-  ) {}
+  ) {}  
 
-  loadLeaves$ = createEffect(() =>
+  loadLeaves$ = createEffect((): Observable<Action> =>
     this.actions$.pipe(
       ofType(LeavesActions.loadLeaves),
-      switchMap(() =>
+      switchMap(({ page, pageLimit }) =>
         this.authService.login().pipe(
           switchMap(() =>
-            this.leavesService.getLeaves().pipe(
-              map(data => LeavesActions.loadLeavesSuccess({ leaves: data })),
-              catchError(err => of(LeavesActions.loadLeavesFailure({ error: err.message })))
+            this.leavesService.getLeaves(page, pageLimit).pipe(
+              map(leaves => LeavesActions.loadLeavesSuccess({ leaves })),
+              catchError(error => of(LeavesActions.loadLeavesFailure({ error })))
             )
           )
         )

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LeavesService } from './leaves.service';
+import { LeavesService, Leave } from './leaves.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,7 +41,7 @@ export class LeavesEditComponent implements OnInit {
       LeaveLimitHours: [
         data?.LeaveLimitHours || '',
         [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]
-      ]
+      ] 
     }));
   }
 

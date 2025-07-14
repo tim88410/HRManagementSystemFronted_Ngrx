@@ -1,26 +1,35 @@
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthService {
-  private token = '';
+  private readonly apiUrl = 'https://localhost:44378/Auth/login';
+  private readonly authHeader = 'Basic c3U6MXFhekBXU1gzZWRj';
 
   constructor(private http: HttpClient) {}
 
-  login() {
-    const headers = new HttpHeaders({
-      Authorization: 'Basic c3U6MXFhekBXU1gzZWRj'
-    });
-
-    return this.http.post<any>('https://localhost:44378/Auth/login', {}, { headers })
-      .pipe(map(res => {
-        this.token = res.ReturnData;
-        return this.token;
-      }));
+  login(): Observable<string> {
+    return this.http.post<{ ReturnCode: number; ReturnData: string }>(
+      this.apiUrl,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: this.authHeader
+        })
+      }
+    ).pipe(
+      tap(res => {
+        if (res.ReturnCode === 5) {
+          localStorage.setItem('token', res.ReturnData);
+        }
+      }),
+      map(res => res.ReturnData)
+    );
   }
 
-  getToken(): string {
-    return this.token;
+  getToken(): string | null {
+    return localStorage.getItem('token'); 
   }
 }
