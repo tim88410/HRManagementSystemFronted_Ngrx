@@ -12,4 +12,14 @@ export class LeavesService {
         map(res => res.ReturnData?.ReturnData?.LeavesInfos || [])
       );
   }
+
+  getLeaveById(id: number) {
+    return this.http.get<any>(`https://localhost:44378/v1/Leaves/${id}`)
+      .pipe(map(res => res.ReturnData?.ReturnData));
+  }
+
+  updateLeave(data: any) {
+    return this.http.put<any>('https://localhost:44378/v1/Leaves', data)
+      .pipe(map(res => res.ReturnCode === 5));
+  }
 }

@@ -16,14 +16,22 @@ import { LeavesService } from './leaves/leaves.service';
 import { AuthService } from './core/services/auth.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LeaveNameDropdownComponent } from './shared/components/leave-name-dropdown/leave-name-dropdown.component';
+import { LeavesEditComponent } from './leaves/leaves-edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    LeavesComponent
+    LeavesComponent,
+    LeavesEditComponent,
+    LeaveNameDropdownComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     StoreModule.forRoot({ leaves: leavesReducer }),
     EffectsModule.forRoot([LeavesEffects])

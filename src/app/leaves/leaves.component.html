@@ -1,5 +1,6 @@
 <div class="p-6">
   <h2 class="text-2xl font-semibold mb-4">Leave List</h2>
+
   <table class="min-w-full border border-gray-300">
     <thead class="bg-gray-100">
       <tr>
@@ -8,6 +9,7 @@
         <th class="p-2 text-left">Description</th>
         <th class="p-2 text-left">Hours</th>
         <th class="p-2 text-left">Created</th>
+        <th class="p-2 text-left">Action</th> <!-- 新增欄位 -->
       </tr>
     </thead>
     <tbody>
@@ -17,6 +19,14 @@
         <td class="p-2">{{ leave.Description }}</td>
         <td class="p-2">{{ leave.LeaveLimitHours }}</td>
         <td class="p-2">{{ leave.CreateDate | date }}</td>
+        <td class="p-2">
+          <button
+            (click)="goToEdit(leave.Id)"
+            class="text-blue-600 hover:underline"
+          >
+            編輯
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
