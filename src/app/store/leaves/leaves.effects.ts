@@ -22,7 +22,10 @@ export class LeavesEffects {
         this.authService.login().pipe(
           switchMap(() =>
             this.leavesService.getLeaves(page, pageLimit).pipe(
-              map(leaves => LeavesActions.loadLeavesSuccess({ leaves })),
+              map(res => {
+                const leaves = res.ReturnData?.ReturnData?.LeavesInfos ?? [];
+                return LeavesActions.loadLeavesSuccess({ leaves });
+              }),
               catchError(error => of(LeavesActions.loadLeavesFailure({ error })))
             )
           )

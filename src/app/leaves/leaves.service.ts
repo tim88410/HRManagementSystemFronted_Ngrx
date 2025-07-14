@@ -8,8 +8,19 @@ export interface Leave {
   LeaveName: string;
   Description: string;
   LeaveLimitHours: number;
-  OperateUserId: number;
   CreateDate: string;
+  OperateUserId: number;
+}
+
+export interface LeavesResponse {
+  ReturnCode: number;
+  ReturnData: {
+    ReturnCode: number;
+    ReturnData: {
+      LeavesInfos: Leave[];
+      Total: number;
+    };
+  };
 }
 
 @Injectable({
@@ -20,10 +31,9 @@ export class LeavesService {
 
   constructor(private http: HttpClient) {}
 
-  getLeaves(page: number, pageLimit: number): Observable<Leave[]> {
+  getLeaves(page: number, pageLimit: number): Observable<LeavesResponse> {
     const url = `${this.baseUrl}?Page=${page}&PageLimit=${pageLimit}`;
-    return this.http.get<{ ReturnCode: number, ReturnData: { LeavesInfos: Leave[] } }>(url)
-      .pipe(map(res => res.ReturnData.LeavesInfos));
+    return this.http.get<LeavesResponse>(url);
   }
 
   // 新增 - 根據 ID 取得單筆 Leave 資料
