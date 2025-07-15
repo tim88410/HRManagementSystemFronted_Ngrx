@@ -1,4 +1,3 @@
-// src/app/leaves/leaves.model.ts
 export interface Leaves {
   Id: number;
   LeaveName: string;

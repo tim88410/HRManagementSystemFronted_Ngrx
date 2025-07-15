@@ -20,7 +20,7 @@ export class LeaveNameDropdownComponent implements ControlValueAccessor {
   onTouched = () => {};
 
   writeValue(obj: any): void {
-    this.value = obj ?? ''; // ⬅️ 傳入值同步到本地變數
+    this.value = obj ?? ''; 
   }
 
   registerOnChange(fn: any): void {
