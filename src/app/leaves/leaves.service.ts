@@ -37,10 +37,14 @@ export class LeavesService {
   }
 
   // 新增 - 根據 ID 取得單筆 Leave 資料
-  getLeaveById(id: number): Observable<Leave> {
+  getLeaveById(id: number): Observable<{ ReturnCode: number, data: Leave | null }> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<{ ReturnCode: number, ReturnData: { ReturnData: Leave } }>(url)
-      .pipe(map(res => res.ReturnData.ReturnData));
+    return this.http.get<{ ReturnCode: number, ReturnData: { ReturnData: Leave } }>(url).pipe(
+      map(res => ({
+        ReturnCode: res.ReturnCode,
+        data: res.ReturnData?.ReturnData || null
+      }))
+    );
   }
 
   // 新增 - 更新 Leave
@@ -51,6 +55,22 @@ export class LeavesService {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put(url, payload, { headers });
+    if(payload.Id === 0)
+    {
+      return this.http.post(url, payload, { headers });
+    }
+    else
+    {
+      return this.http.put(url, payload, { headers });
+    }
+  }
+
+  deleteLeave(id: number, userId: number): Observable<any> {
+    const url = `${this.baseUrl}?Id=${id}&userId=${userId}`;
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete(url, { headers });
   }
 }

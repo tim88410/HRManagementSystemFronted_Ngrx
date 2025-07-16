@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LeavesService, Leave } from './leaves.service';
 import { Router } from '@angular/router';
+import { ReturnCode } from '../core/enums/return-code.enum';
 
 @Component({
   selector: 'app-leaves-edit',
@@ -27,8 +28,29 @@ export class LeavesEditComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.leavesService.getLeaveById(id).subscribe(leave => {
-      this.addLeaveRow(leave);
+    if (id === 0) {
+      this.addLeaveRow({
+        Id: 0,
+        OperateUserId: 1,
+        LeaveName: '',
+        Description: '',
+        LeaveLimitHours: ''
+      });
+      return;
+    }
+
+    // 情境 2: 取得資料 (含 ReturnCode 處理)
+    this.leavesService.getLeaveById(id).subscribe(result => {
+      if (result.ReturnCode === ReturnCode.OperationSuccessful && result.data) {
+        this.addLeaveRow(result.data);
+      } else if (result.ReturnCode === ReturnCode.DataNotFound) {
+        alert('查無資料，將返回列表頁');
+        this.router.navigate(['/leaves'], {
+          queryParams: { Page: 1, PageLimit: 10 }
+        });
+      } else {
+        alert('取得資料失敗');
+      }
     });
   }
 
