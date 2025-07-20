@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,14 +13,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class LeaveNameDropdownComponent implements ControlValueAccessor {
-  options = ['病假', '事假', '公假', '生日假', '喪假', '婚假'];
-  value = '';
+  @Input() options: string[] = [];
 
-  onChange = (_: any) => {};
-  onTouched = () => {};
+  value: string = '';
 
-  writeValue(obj: any): void {
-    this.value = obj ?? ''; 
+  onChange = (value: any) => {};
+  onTouchedHandler = () => {};
+
+  writeValue(value: string): void {
+    this.value = value || '';
   }
 
   registerOnChange(fn: any): void {
@@ -28,15 +29,11 @@ export class LeaveNameDropdownComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouchedHandler = fn;
   }
 
   onSelectChange(value: string): void {
     this.value = value;
     this.onChange(value);
-  }
-
-  onTouchedHandler(): void {
-    this.onTouched();
   }
 }

@@ -1,10 +1,13 @@
 <select
-  [ngModel]="value"
+  [(ngModel)]="value"
   (ngModelChange)="onSelectChange($event)"
+  [ngModelOptions]="{ standalone: true }"
   (blur)="onTouchedHandler()"
   class="border rounded px-2 py-1 w-full"
   required
 >
   <option value="">-- 請選擇假別 --</option>
-  <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+  <option *ngFor="let option of options" [value]="option">
+    {{ option }}
+  </option>
 </select>

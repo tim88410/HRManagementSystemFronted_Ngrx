@@ -6,7 +6,7 @@
       <div *ngFor="let group of leavesArray.controls; let i = index" [formGroupName]="i" class="border p-4 rounded-xl mb-4">
         
         <label class="block mb-2">假別</label>
-        <app-leave-name-dropdown formControlName="LeaveName"></app-leave-name-dropdown>
+        <app-leave-name-dropdown formControlName="LeaveName" [options]="['病假','事假','公假','生日假','喪假','婚假']"></app-leave-name-dropdown>
         <div *ngIf="hasError(i, 'LeaveName')" class="text-red-500 text-sm">假別為必填</div>
 
         <label class="block mt-4 mb-2">描述</label>
