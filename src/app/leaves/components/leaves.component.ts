@@ -8,8 +8,9 @@ import { selectLeaves } from '../store/leaves/leaves.selectors';
 import { LeavesService } from '../services/leaves.service';
 
 @Component({
-  selector: 'app-leaves',
-  templateUrl: './leaves.component.html'
+    selector: 'app-leaves',
+    templateUrl: './leaves.component.html',
+    standalone: false
 })
 export class LeavesComponent implements OnInit {
   leaves$ = this.store.select(selectLeaves);

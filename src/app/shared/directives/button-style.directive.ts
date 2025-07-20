@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appButtonStyle]' 
+    selector: '[appButtonStyle]',
+    standalone: false
 })
 export class ButtonStyleDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {

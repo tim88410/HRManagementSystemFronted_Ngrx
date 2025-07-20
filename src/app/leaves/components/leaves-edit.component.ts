@@ -6,8 +6,9 @@ import { Router } from '@angular/router';
 import { ReturnCode } from '../../core/enums/return-code.enum';
 
 @Component({
-  selector: 'app-leaves-edit',
-  templateUrl: './leaves-edit.component.html'
+    selector: 'app-leaves-edit',
+    templateUrl: './leaves-edit.component.html',
+    standalone: false
 })
 export class LeavesEditComponent implements OnInit {
   form: FormGroup;
