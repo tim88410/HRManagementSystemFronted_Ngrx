@@ -9,18 +9,16 @@ import { LeavesRoutingModule } from './leaves-routing.module';
 import { LeavesComponent } from './components/leaves.component';
 import { LeavesEditComponent } from './components/leaves-edit.component';
 
-import { LeaveNameDropdownComponent } from '../shared/components/leave-name-dropdown/leave-name-dropdown.component';
-
 import { leavesReducer } from './store/leaves/leaves.reducer';
 import { LeavesEffects } from './store/leaves/leaves.effects';
+import { LeavesService } from './services/leaves.service';
 
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     LeavesComponent,
-    LeavesEditComponent,
-    LeaveNameDropdownComponent
+    LeavesEditComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
     StoreModule.forFeature('leaves', leavesReducer),
     EffectsModule.forFeature([LeavesEffects]),
     SharedModule 
-  ]
+  ],
+  providers: [LeavesService]
 })
 export class LeavesModule { }

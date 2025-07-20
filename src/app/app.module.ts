@@ -1,50 +1,47 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LeavesComponent } from './leaves/components/leaves.component';
 
-import { leavesReducer } from './leaves/store/leaves/leaves.reducer';
-import { LeavesEffects } from './leaves/store/leaves/leaves.effects';
-
-import { LeavesService } from './leaves/services/leaves.service';
 import { AuthService } from './core/services/auth.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LeavesService } from './leaves/services/leaves.service';
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LeaveNameDropdownComponent } from './shared/components/leave-name-dropdown/leave-name-dropdown.component';
-import { LeavesEditComponent } from './leaves/components/leaves-edit.component';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LeavesComponent,
-    LeavesEditComponent,
-    LeaveNameDropdownComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({ leaves: leavesReducer }),
-    EffectsModule.forRoot([LeavesEffects])
+
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      }
+    }),
+
+    EffectsModule.forRoot([])
   ],
   providers: [
-    LeavesService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    LeavesService
   ],
   bootstrap: [AppComponent]
 })

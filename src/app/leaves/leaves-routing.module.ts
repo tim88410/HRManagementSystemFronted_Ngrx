@@ -5,7 +5,7 @@ import { LeavesEditComponent } from './components/leaves-edit.component';
 
 const routes: Routes = [
   { path: '', component: LeavesComponent },
-  { path: 'edit', component: LeavesEditComponent }
+  { path: 'edit/:id', component: LeavesEditComponent }
 ];
 
 @NgModule({
