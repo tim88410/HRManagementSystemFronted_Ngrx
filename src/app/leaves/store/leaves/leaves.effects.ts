@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as LeavesActions from './leaves.actions';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
-import { LeavesService } from '../../leaves/leaves.service';
-import { AuthService } from '../../core/services/auth.service';
+import { LeavesService } from '../../services/leaves.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Injectable()
 export class LeavesEffects {

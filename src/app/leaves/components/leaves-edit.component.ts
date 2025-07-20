@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LeavesService, Leave } from './leaves.service';
+import { LeavesService, Leave } from '../services/leaves.service';
 import { Router } from '@angular/router';
-import { ReturnCode } from '../core/enums/return-code.enum';
+import { ReturnCode } from '../../core/enums/return-code.enum';
 
 @Component({
   selector: 'app-leaves-edit',

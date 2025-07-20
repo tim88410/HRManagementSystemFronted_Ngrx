@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LeavesComponent } from './leaves/leaves.component';
-import { LeavesEditComponent } from './leaves/leaves-edit.component';
+import { LeavesComponent } from './leaves/components/leaves.component';
+import { LeavesEditComponent } from './leaves/components/leaves-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'leaves', pathMatch: 'full' },

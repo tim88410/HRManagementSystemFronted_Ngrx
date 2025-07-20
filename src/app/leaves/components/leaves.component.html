@@ -2,9 +2,10 @@
   <div class="flex justify-between items-center mb-4">
     <h2 class="text-2xl font-semibold">Leave List</h2>
     <button
+      appButtonStyle
       type="button"
       (click)="goToEdit(0)"
-      class="bg-blue-500 text-white px-4 py-2 rounded"
+      class="bg-blue-500 "
     >
       新增
     </button>
@@ -30,17 +31,19 @@
           <td class="p-2">{{ leave.LeaveLimitHours }}</td>
           <td class="p-2">{{ leave.CreateDate | date }}</td>
           <td class="p-2">
-            <button
+            <button 
+              appButtonStyle
               type="button"
               (click)="goToEdit(leave.Id)"
-              class="bg-blue-500 text-white px-4 py-2 rounded"
+              class="bg-blue-500"
             >
               編輯
             </button>
-            <button
+            <button 
+              appButtonStyle
               type="button"
               (click)="confirmDelete(leave.Id, leave.OperateUserId)"
-              class="bg-red-500 text-white px-4 py-2 rounded"
+              class="bg-red-500"
             >
               刪除
             </button>
@@ -67,17 +70,19 @@
           <td class="p-2">{{ leave.Description }}</td>
           <td class="p-2">{{ leave.LeaveLimitHours }}</td>
           <td class="p-2">
-            <button
+            <button 
+              appButtonStyle
               type="button"
               (click)="goToEdit(leave.Id)"
-              class="bg-blue-500 text-white px-4 py-2 rounded"
+              class="bg-blue-500"
             >
               編輯
             </button>
-            <button
+            <button 
+              appButtonStyle
               type="button"
               (click)="confirmDelete(leave.Id, leave.OperateUserId)"
-              class="bg-red-500 text-white px-4 py-2 rounded"
+              class="bg-red-500"
             >
               刪除
             </button>

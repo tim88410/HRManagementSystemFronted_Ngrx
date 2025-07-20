@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { loadLeaves } from '../store/leaves/leaves.actions';
 import { selectLeaves } from '../store/leaves/leaves.selectors';
-import { LeavesService } from './leaves.service';
+import { LeavesService } from '../services/leaves.service';
 
 @Component({
   selector: 'app-leaves',
