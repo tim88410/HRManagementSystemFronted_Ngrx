@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LeavesRoutingModule } from './leaves-routing.module';
 import { LeavesComponent } from './components/leaves.component';
 import { LeavesEditComponent } from './components/leaves-edit.component';
+import { LeavesDemoABComponent } from './components/leaves-demo-ab.component';
 
 import { leavesReducer } from './store/leaves/leaves.reducer';
 import { LeavesEffects } from './store/leaves/leaves.effects';
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [
     LeavesComponent,
-    LeavesEditComponent
+    LeavesEditComponent,
+    LeavesDemoABComponent
   ],
   imports: [
     CommonModule,

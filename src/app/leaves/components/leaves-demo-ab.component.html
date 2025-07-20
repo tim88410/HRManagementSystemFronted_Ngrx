@@ -1,0 +1,99 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-semibold">Leave List</h2>
+    <button
+      appButtonStyle
+      type="button"
+      (click)="goToEdit(0)"
+      class="bg-blue-500 "
+    >
+      新增
+    </button>
+  </div>
+
+  <div class="container mx-auto p-4">
+    <!-- 桌面版 Table -->
+    <table class="hidden md:table w-full border border-gray-300">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-2 text-left">ID</th>
+          <th class="p-2 text-left">Name</th>
+          <th class="p-2 text-left">Description</th>
+          <th class="p-2 text-left">Hours</th>
+          <th class="p-2 text-left">Created</th>
+          <th class="p-2 text-left">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (leave of (similarLeaves$ | async); track leave.Id) {
+          <tr class="border-t">
+            <td class="p-2">{{ leave.Id }}</td>
+            <td class="p-2">{{ leave.LeaveName }}</td>
+            <td class="p-2">{{ leave.Description }}</td>
+            <td class="p-2">{{ leave.LeaveLimitHours }}</td>
+            <td class="p-2">{{ leave.CreateDate | date }}</td>
+            <td class="p-2">
+              <button 
+                appButtonStyle
+                type="button"
+                (click)="goToEdit(leave.Id)"
+                class="bg-blue-500"
+              >
+                編輯
+              </button>
+              <button 
+                appButtonStyle
+                type="button"
+                (click)="confirmDelete(leave.Id, leave.OperateUserId)"
+                class="bg-red-500"
+              >
+                刪除
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- 手機版 Table -->
+    <table class="table md:hidden w-full border border-gray-300">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-2 text-left">ID</th>
+          <th class="p-2 text-left">Name</th>
+          <th class="p-2 text-left">Description</th>
+          <th class="p-2 text-left">Hours</th>
+          <th class="p-2 text-left">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (leave of (similarLeaves$ | async); track leave.Id) {
+          <tr class="border-t">
+            <td class="p-2">{{ leave.Id }}</td>
+            <td class="p-2">{{ leave.LeaveName }}</td>
+            <td class="p-2">{{ leave.Description }}</td>
+            <td class="p-2">{{ leave.LeaveLimitHours }}</td>
+            <td class="p-2">
+              <button 
+                appButtonStyle
+                type="button"
+                (click)="goToEdit(leave.Id)"
+                class="bg-blue-500"
+              >
+                編輯
+              </button>
+              <button 
+                appButtonStyle
+                type="button"
+                (click)="confirmDelete(leave.Id, leave.OperateUserId)"
+                class="bg-red-500"
+              >
+                刪除
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

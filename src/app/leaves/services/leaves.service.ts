@@ -73,4 +73,11 @@ export class LeavesService {
     });
     return this.http.delete(url, { headers });
   }
+
+  searchLeavesByName(name: string): Observable<LeavesResponse> {
+    const encoded = encodeURIComponent(name || '');
+    const url = `${this.baseUrl}?Page=1&PageLimit=10&LeaveName=${encoded}`;
+    console.log(url);
+    return this.http.get<LeavesResponse>(url);
+  }
 }
