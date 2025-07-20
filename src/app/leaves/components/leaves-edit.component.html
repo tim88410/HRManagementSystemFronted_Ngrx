@@ -3,21 +3,32 @@
 
   <form [formGroup]="form" (ngSubmit)="save()">
     <div formArrayName="leaves">
-      <div *ngFor="let group of leavesArray.controls; let i = index" [formGroupName]="i" class="border p-4 rounded-xl mb-4">
-        
-        <label class="block mb-2">假別</label>
-        <app-leave-name-dropdown formControlName="LeaveName" [options]="['病假','事假','公假','生日假','喪假','婚假']"></app-leave-name-dropdown>
-        <div *ngIf="hasError(i, 'LeaveName')" class="text-red-500 text-sm">假別為必填</div>
+      @for (group of leavesArray.controls; track i; let i = $index) {
+        <div [formGroupName]="i" class="border p-4 rounded-xl mb-4">
 
-        <label class="block mt-4 mb-2">描述</label>
-        <input type="text" formControlName="Description" class="border rounded px-2 py-1 w-full" />
-        <div *ngIf="hasError(i, 'Description')" class="text-red-500 text-sm">描述為必填</div>
+          <label class="block mb-2">假別</label>
+          <app-leave-name-dropdown
+            formControlName="LeaveName"
+            [options]="['病假','事假','公假','生日假','喪假','婚假']">
+          </app-leave-name-dropdown>
+          @if (hasError(i, 'LeaveName')) {
+            <div class="text-red-500 text-sm">假別為必填</div>
+          }
 
-        <label class="block mt-4 mb-2">時數</label>
-        <input type="text" formControlName="LeaveLimitHours" class="border rounded px-2 py-1 w-full" />
-        <div *ngIf="hasError(i, 'LeaveLimitHours')" class="text-red-500 text-sm">請輸入正確的小數格式</div>
+          <label class="block mt-4 mb-2">描述</label>
+          <input type="text" formControlName="Description" class="border rounded px-2 py-1 w-full" />
+          @if (hasError(i, 'Description')) {
+            <div class="text-red-500 text-sm">描述為必填</div>
+          }
 
-      </div>
+          <label class="block mt-4 mb-2">時數</label>
+          <input type="text" formControlName="LeaveLimitHours" class="border rounded px-2 py-1 w-full" />
+          @if (hasError(i, 'LeaveLimitHours')) {
+            <div class="text-red-500 text-sm">請輸入正確的小數格式</div>
+          }
+
+        </div>
+      }
     </div>
     <button appButtonStyle type="submit" class="bg-blue-500">儲存</button>
   </form>
