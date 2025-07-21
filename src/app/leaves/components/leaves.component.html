@@ -15,23 +15,23 @@
     <table class="hidden md:table w-full border border-gray-300">
       <thead class="bg-gray-100">
         <tr>
-          <th class="p-2 text-left">ID</th>
-          <th class="p-2 text-left">Name</th>
-          <th class="p-2 text-left">Description</th>
-          <th class="p-2 text-left">Hours</th>
-          <th class="p-2 text-left">Created</th>
-          <th class="p-2 text-left">Action</th>
+          <th class="p-2 text-left w-[10%]">ID</th>
+          <th class="p-2 text-left w-[10%]">Name</th>
+          <th class="p-2 text-left w-[30%]">Description</th>
+          <th class="p-2 text-left w-[10%]">Hours</th>
+          <th class="p-2 text-left w-[20%]">Created</th>
+          <th class="p-2 text-left w-[20%]">Action</th>
         </tr>
       </thead>
       <tbody>
         @for (leave of (leaves$ | async); track leave.Id) {
           <tr class="border-t">
-            <td class="p-2">{{ leave.Id }}</td>
-            <td class="p-2">{{ leave.LeaveName }}</td>
-            <td class="p-2">{{ leave.Description }}</td>
-            <td class="p-2">{{ leave.LeaveLimitHours }}</td>
-            <td class="p-2">{{ leave.CreateDate | date }}</td>
-            <td class="p-2">
+            <td class="p-2 w-[10%]">{{ leave.Id }}</td>
+            <td class="p-2 w-[10%]">{{ leave.LeaveName }}</td>
+            <td class="p-2 w-[30%]">{{ leave.Description }}</td>
+            <td class="p-2 w-[10%]">{{ leave.LeaveLimitHours }}</td>
+            <td class="p-2 w-[20%]">{{ leave.CreateDate | date }}</td>
+            <td class="p-2 w-[20%]">
               <button 
                 appButtonStyle
                 type="button"
@@ -57,21 +57,21 @@
     <table class="table md:hidden w-full border border-gray-300">
       <thead class="bg-gray-100">
         <tr>
-          <th class="p-2 text-left">ID</th>
-          <th class="p-2 text-left">Name</th>
-          <th class="p-2 text-left">Description</th>
-          <th class="p-2 text-left">Hours</th>
-          <th class="p-2 text-left">Action</th>
+          <th class="p-2 text-left w-[10%]">ID</th>
+          <th class="p-2 text-left w-[20%]">Name</th>
+          <th class="p-2 text-left w-[30%]">Description</th>
+          <th class="p-2 text-left w-[10%]">Hours</th>
+          <th class="p-2 text-left w-[30%]">Action</th>
         </tr>
       </thead>
       <tbody>
         @for (leave of (leaves$ | async); track leave.Id) {
           <tr class="border-t">
-            <td class="p-2">{{ leave.Id }}</td>
-            <td class="p-2">{{ leave.LeaveName }}</td>
-            <td class="p-2">{{ leave.Description }}</td>
-            <td class="p-2">{{ leave.LeaveLimitHours }}</td>
-            <td class="p-2">
+            <td class="p-2 w-[10%]">{{ leave.Id }}</td>
+            <td class="p-2 w-[20%]">{{ leave.LeaveName }}</td>
+            <td class="p-2 w-[30%]">{{ leave.Description }}</td>
+            <td class="p-2 w-[10%]">{{ leave.LeaveLimitHours }}</td>
+            <td class="p-2 w-[30%]">
               <button 
                 appButtonStyle
                 type="button"
