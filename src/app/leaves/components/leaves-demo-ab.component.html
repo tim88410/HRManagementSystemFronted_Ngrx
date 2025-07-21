@@ -4,7 +4,7 @@
     <button
       appButtonStyle
       type="button"
-      (click)="goToEdit(0)"
+      (click)="onAdd()"
       class="bg-blue-500 "
     >
       新增
@@ -36,7 +36,7 @@
               <button 
                 appButtonStyle
                 type="button"
-                (click)="goToEdit(leave.Id)"
+                (click)="onEdit(leave)"
                 class="bg-blue-500"
               >
                 編輯
@@ -77,7 +77,7 @@
               <button 
                 appButtonStyle
                 type="button"
-                (click)="goToEdit(leave.Id)"
+                (click)="onEdit(leave)"
                 class="bg-blue-500"
               >
                 編輯

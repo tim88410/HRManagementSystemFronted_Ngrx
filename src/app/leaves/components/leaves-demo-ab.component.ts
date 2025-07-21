@@ -15,6 +15,14 @@ export class LeavesDemoABComponent implements OnInit {
   leaves$ = this.store.select(selectLeaves);
   private similarLeavesSubject = new BehaviorSubject<Leave[]>([]);
   similarLeaves$ = this.similarLeavesSubject.asObservable();
+  emptyLeave: Leave = {
+    Id: 0,
+    LeaveName: '',
+    Description: '',
+    LeaveLimitHours: 0,
+    CreateDate: '',
+    OperateUserId: 0
+  };
 
   constructor(
     private store: Store,
@@ -24,6 +32,7 @@ export class LeavesDemoABComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe((params) => {
       const page = +params['Page'] || 1;
       const pageLimit = +params['PageLimit'] || 10;
@@ -56,8 +65,14 @@ export class LeavesDemoABComponent implements OnInit {
       });
   }
 
-  goToEdit(id: number): void {
-    this.router.navigate(['/leaves/edit', id]);
+  onAdd(): void {
+    this.onEdit(this.emptyLeave);
+  }
+
+  onEdit(leave: any) {
+    this.router.navigate(['/leaves/edit', leave.Id], {
+      state: { data: leave }
+    });
   }
 
   confirmDelete(id: number, userId: number): void {
